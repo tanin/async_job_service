@@ -1,24 +1,22 @@
-# README
+async_job_service - provides json API for processing async jobs
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# PREREQUISITES
+  * brew cask install virtualbox
+  * brew install docker docker-machine
+  * docker-machine create --driver virtualbox default
+  * export the Docker environment variables to your shell:
+    eval "$(docker-machine env default)"
+  * brew install docker-compose
 
-Things you may want to cover:
+# INSTALL AND RUN:
+  * git clone git@github.com:tanin/async_job_service.git
+  * cd async_job_service
+  * 
 
-* Ruby version
+# API:
+  * GET: '/:queue_name' (http://domain/email/:EMAIL_ID/status?status=recived)
 
-* System dependencies
+  - controller:
+    queues
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
