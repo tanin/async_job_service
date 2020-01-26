@@ -14,6 +14,8 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require "rails_event_store"
+require "aggregate_root"
 require 'sidekiq'
 
 # Require the gems listed in Gemfile, including any gems
@@ -35,5 +37,16 @@ module AsyncJobService
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.active_job.queue_adapter = :sidekiq
+
+    config.event_store = RailsEventStore::Client.new(
+      dispatcher: RubyEventStore::ComposedDispatcher.new(
+        RailsEventStore::AfterCommitAsyncDispatcher.new(scheduler: RailsEventStore::ActiveJobScheduler.new),
+        RubyEventStore::Dispatcher.new
+      )
+    )
+
+    AggregateRoot.configure do |config|
+      config.default_event_store = Rails.application.config.event_store
+    end
   end
 end
