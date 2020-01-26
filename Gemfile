@@ -5,9 +5,11 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
+gem 'rails_event_store', require: 'rails_event_store/all'
 gem 'pg'
-gem "bunny", '>= 2.14.1'
 gem 'dotenv-rails'
+gem 'redis'
+gem 'sidekiq'
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
