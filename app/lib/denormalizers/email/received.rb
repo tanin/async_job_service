@@ -1,7 +1,10 @@
 module Denormalizers
   module Email
     class Received < ActiveJob::Base
+      queue_as :email
+
       # Handles only creation
+      # if failed goes to rety queue for expection
       def perform(payload)
         event = event_store.deserialize(payload.symbolize_keys)
 
