@@ -12,7 +12,7 @@ describe CommandHandlers::RunJob do
         execute(cmd)
 
         expect(Rails.application.config.event_store).to have_published(
-          an_event(Events::EmailReceived).with_data(status: 'received', id: 123)
+          an_event(Events::EmailReceived).with_data(status: 'received', id: 123, uid: uid)
         ).strict
       end
     end

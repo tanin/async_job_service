@@ -2,9 +2,9 @@ module Commands
   module RunJobAttributable
     def self.included(base)
       base.class_eval do
-        attr_accessor :uid # uid string generated from external id, always the same string for the same number
-        attr_accessor :queue_name # queue_name string
-        attr_accessor :state # state is the key of the data that represents an event name
+        attr_accessor :uid # string
+        attr_accessor :queue_name # string
+        attr_accessor :state # the key of the data that represents an event name
         attr_accessor :data # data to be passed for the async processing, must include state key
 
         validates :uid, presence: true, allow_blank: false

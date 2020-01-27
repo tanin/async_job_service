@@ -17,7 +17,7 @@ class Domain::RunJob
 
     define_apply_method(event_klass)
 
-    apply(event_klass.new(data: data.merge(state: state.to_sym)))
+    apply(event_klass.new(data: data.merge(state: state.to_sym, uid: uid)))
   end
 
   def error(error_message)
