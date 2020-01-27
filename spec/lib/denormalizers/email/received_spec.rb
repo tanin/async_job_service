@@ -37,7 +37,8 @@ describe Denormalizers::Email::Received do
             status: 'error',
             queue_name: 'email',
             state: 'status'
-          )
+          ),
+          an_event(Events::StateChangedToError).with_data(state: 'error', error_message: 'Validation failed: External has already been taken')
         ).strict
       end
     end
