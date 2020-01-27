@@ -67,5 +67,5 @@
   ```
 
 ### Web
-  - post/(get - disscuss): '/:queue_name/:id/status' (http://domain/email/:EMAIL_ID/status?status=received)
+  - post/(get - disscuss): '/:queue_name/:id/:status' (http://domain/email/:EMAIL_ID/status?status=received)
 
