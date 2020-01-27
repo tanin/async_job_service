@@ -8,8 +8,8 @@ class Domain::RunJob
     @queue_name = queue_name
   end
 
-  def create(data)
-    event_klass = event_klass(data[:state])
+  def create(data, state)
+    event_klass = event_klass(data[state.to_sym])
 
     define_apply_method(event_klass)
 

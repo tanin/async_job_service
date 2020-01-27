@@ -12,14 +12,14 @@ describe CommandHandlers::RunJob do
         execute(cmd)
 
         expect(Rails.application.config.event_store).to have_published(
-          an_event(Events::EmailReceived).with_data(state: 'received', id: 123)
+          an_event(Events::EmailReceived).with_data(status: 'received', id: 123)
         ).strict
       end
     end
 
     context 'when fails' do
       it 'raises exception' do
-        cmd = Commands::RunJob.new(uid: uid, queue_name: 'post', data: { state: 'received', id: 123 })
+        cmd = Commands::RunJob.new(uid: uid, queue_name: 'post', state: 'status', data: { status: 'received', id: 123 })
 
         expect { execute(cmd) }.to raise_error(NotImplementedError)
 
