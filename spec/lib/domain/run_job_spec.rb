@@ -4,7 +4,17 @@ describe Domain::RunJob do
       it 'fires event' do
         run_job = described_class.new('some_uid', 'email')
         run_job.create({ status: 'received', id: 1 }, 'status')
+
+        expect(run_job.state).to eq('received')
         expect(run_job).to have_applied(event(Events::EmailReceived)).once
+      end
+    end
+
+    context 'when in error state' do
+      it 'raises JobInErrorState exception' do
+        run_job = described_class.new('some_uid', 'email')
+        allow(run_job).to receive(:error?).and_return(true)
+        expect { run_job.create({ status: 'received', id: 1 }, 'status') }.to raise_error(Domain::RunJob::InErrorStateError)
       end
     end
 
