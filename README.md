@@ -55,7 +55,14 @@
   ```ruby
   include Commands::Execute
   uid = Digest::MD5.hexdigest('123')
-  cmd = Commands::RunJob.new(uid: uid, queue_name: 'email', state: 'status', data: { status: 'received', id: 125 })
+
+  cmd = Commands::RunJob.new(
+    uid: uid,
+    queue_name: 'email',
+    state: 'status',
+    data: { status: 'received', id: 125 }
+  )
+
   execute(cmd)
   ```
 
