@@ -11,7 +11,7 @@ services:
 
   sidekiq:
     build: .
-    command: bundle exec sidekiq
+    command: bundle exec sidekiq -C ./config/sidekiq.yml
     links:
       - db
       - redis
