@@ -1,7 +1,18 @@
 describe Domain::RunJob do
+  describe '#error' do
+    it 'fires StateChangedToError event' do
+      run_job = described_class.new('some_uid', 'email')
+      run_job.error('something went wrong')
+
+      expect(run_job.state).to eq('error')
+      expect(run_job.error_message).to eq('something went wrong')
+      expect(run_job).to have_applied(event(Events::StateChangedToError)).once
+    end
+  end
+
   describe '#create' do
     context 'when event exists' do
-      it 'fires event' do
+      it 'fires EmailReceived event' do
         run_job = described_class.new('some_uid', 'email')
         run_job.create({ status: 'received', id: 1 }, 'status')
 

@@ -48,8 +48,8 @@ class Domain::RunJob
   end
 
   def apply_state_changed_to_error(event)
-    @state = event.data[:error]
-    @error_message = even.data[:error_message]
+    @state = event.data[:state]
+    @error_message = event.data[:error_message]
   end
 
   def error?
