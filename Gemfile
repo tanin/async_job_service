@@ -10,6 +10,7 @@ gem 'pg'
 gem 'dotenv-rails'
 gem 'redis'
 gem 'sidekiq'
+gem 'awesome_print'
 
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
