@@ -8,7 +8,7 @@ describe CommandHandlers::RunJob do
 
     context 'when success' do
       it 'Events::EmailReceived event published (integration)' do
-        cmd = Commands::RunJob.new(uid: uid, queue_name: 'email', data: { state: 'received', id: 123 })
+        cmd = Commands::RunJob.new(uid: uid, state: 'status', queue_name: 'email', data: { status: 'received', id: 123 })
         execute(cmd)
 
         expect(Rails.application.config.event_store).to have_published(
