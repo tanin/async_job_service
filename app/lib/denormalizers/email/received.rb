@@ -3,7 +3,7 @@ module Denormalizers
     class Received < ActiveJob::Base
       # Handles only creation
       def perform(payload)
-        event = event_store.deserialize(payload)
+        event = event_store.deserialize(payload.symbolize_keys)
 
         external_id = event.data.delete(:id)
 

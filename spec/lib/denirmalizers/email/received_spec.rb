@@ -4,11 +4,14 @@ describe Denormalizers::Email::Received do
   describe '#perform' do
     context 'when success' do
       it 'creates email record' do
-        event = Events::EmailReceived.new(data: { action: 'received', id: 123 })
+        payload = {
+          "event_id" => "5a71ff1d-b6f1-4edb-986d-7eae0d3f573a",
+          "data" => "---\n:state: received\n:id: 123\n",
+          "metadata" => "---\n:timestamp: 2020-01-27 01:04:23.400503522 Z\n",
+          "event_type" => "Events::EmailReceived",
+        }
 
-        payload = RubyEventStore::Mappers::Default.new.event_to_serialized_record(event)
-
-        expect { described_class.new.perform(payload.to_h) }.to change(Email, :count).by(1)
+        expect { described_class.new.perform(payload) }.to change(Email, :count).by(1)
       end
     end
   end
