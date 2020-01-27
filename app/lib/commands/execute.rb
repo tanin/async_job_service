@@ -10,6 +10,7 @@ module Commands
     def handler_for(command)
       {
         Commands::RunJob => CommandHandlers::RunJob.new,
+        Commands::FailJob => CommandHandlers::FailJob.new,
       }.fetch(command.class)
     end
   end
