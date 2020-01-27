@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CommandHandlers::RunJobCmdHandler do
+describe CommandHandlers::RunJob do
   include Commands::Execute
 
   describe '#call' do
@@ -8,7 +8,7 @@ describe CommandHandlers::RunJobCmdHandler do
 
     context 'when success' do
       it 'Events::EmailReceived event published (integration)' do
-        cmd = Commands::RunJobCmd.new(uid: uid, queue_name: 'email', data: { state: 'received', id: 123 })
+        cmd = Commands::RunJob.new(uid: uid, queue_name: 'email', data: { state: 'received', id: 123 })
         execute(cmd)
 
         expect(Rails.application.config.event_store).to have_published(
@@ -19,7 +19,7 @@ describe CommandHandlers::RunJobCmdHandler do
 
     context 'when fails' do
       it 'raises exception' do
-        cmd = Commands::RunJobCmd.new(uid: uid, queue_name: 'post', data: { state: 'received', id: 123 })
+        cmd = Commands::RunJob.new(uid: uid, queue_name: 'post', data: { state: 'received', id: 123 })
 
         expect { execute(cmd) }.to raise_error(NotImplementedError)
 

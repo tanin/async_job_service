@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Commands::RunJobCmd do
+describe Commands::RunJob do
   let(:uid) { Time.current.strftime("%H%M%S%L#{SecureRandom.random_number(100)}") }
 
   context 'when fails validation' do

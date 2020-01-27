@@ -1,5 +1,5 @@
 module Commands
-  class RunJobCmd < Base
+  class RunJob < Base
     attr_accessor :uid, :queue_name, :data
 
     validates :uid, presence: true, allow_blank: false

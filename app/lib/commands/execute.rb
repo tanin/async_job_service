@@ -9,7 +9,7 @@ module Commands
 
     def handler_for(command)
       {
-        Commands::RunJobCmd => CommandHandlers::RunJobCmdHandler.new,
+        Commands::RunJob => CommandHandlers::RunJob.new,
       }.fetch(command.class)
     end
   end
