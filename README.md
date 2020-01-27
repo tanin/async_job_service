@@ -7,7 +7,7 @@ async_job_service - provides json API for processing async jobs
 
   Unilizes DDD CQRS Event Source patterns
 
-  Flow:
+  - Flow:
     * Controller receves the request (GET to meet the requirements, should be POST actually)
     * Controller calls run job command (Commands::RunJob)
     * Command validates parameters
@@ -18,7 +18,7 @@ async_job_service - provides json API for processing async jobs
     * Aggregate root fails if appropriate worker does not exist on the queue
     * Command publishes event (enqueues message) and stores aggregate root
 
-    ---------
+    *********************
 
     * ActiveJob asynchronous dispatcher reads message (event) and dispatches it to subscribers
     * Subscribers or/and Denormalizers in our case, are processing the event and
