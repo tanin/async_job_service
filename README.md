@@ -6,7 +6,7 @@
     - Sidekiq
     - Postgres
 
-  Unilizes DDD CQRS Event Source patterns
+  Utilizes DDD/CQRS/Event Source patterns
 
   - Flow:
     * Controller receves the request (GET to meet the requirements, should be POST actually)
@@ -46,8 +46,10 @@
   * `docker-compose up`
 
 # API:
-  * Console:
+  - Console:
+
       when docker is up: (check `docker ps`)
+
       `docker exec -it $( docker ps | grep async_job_service_web | awk "{print \$1}" | head -n 1 ) rails c`
 
       ```ruby```
@@ -57,40 +59,5 @@
       execute(cmd)
       ```
 
+  - post/(get - disscuss): '/:queue_name/:id/status' (http://domain/email/:EMAIL_ID/status?status=received)
 
-  * post/(get - disscuss): '/:queue_name/:id/status' (http://domain/email/:EMAIL_ID/status?status=received)
-
-  - controller:
-      create:
-        params mapping:
-          queue_name: (email)
-          uid: (EMAIL_ID)
-          action: (status)
-          data: { status: :received }
-      uid
-
-      handle validation errors
-        cmd.call
-
-  Commands::RunJob ->
-    queue_name: (email)
-    uid: (EMAIL_ID)
-    action: (status)
-    data: { status: received }
-
-  RunJobHandler -> new RunJob
-
-  RunJob ->
-    event_name => queue_name + data[action]
-
-    raise unless event_name.subscribers.count > 1
-
-    fires event(event_name)
-
-  Subscribers/Denormalizers -> subscribed to event event_name
-    reads msg from queue and reacts to event
-      async
-        saves to db
-          Email.create!(uid: uid, data: data )
-
-          on rollback -> change RunJob state? send event?
