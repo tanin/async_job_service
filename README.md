@@ -60,7 +60,7 @@
     uid: uid,
     queue_name: 'email',
     state: 'status',
-    data: { status: 'received', id: 125 }
+    data: { status: 'received', id: 123 }
   )
 
   execute(cmd)

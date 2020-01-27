@@ -1,5 +1,5 @@
 module Commands
-  class RunJob < Base
+  class FailJob < Base
     include Commands::RunJobAttributable
   end
 end
