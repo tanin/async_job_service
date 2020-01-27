@@ -4,10 +4,10 @@ describe CommandHandlers::RunJobCmdHandler do
   include Commands::Execute
 
   describe '#call' do
+    let(:uid) { Time.current.strftime("%H%M%S%L#{SecureRandom.random_number(100)}") }
+
     context 'when success' do
       it 'Events::EmailReceived event published (integration)' do
-        uid = Time.current.strftime("%H%M%S%L#{SecureRandom.random_number(100)}")
-
         cmd = Commands::RunJobCmd.new(uid: uid, queue_name: 'email', data: { state: 'received', id: 123 })
         execute(cmd)
 
@@ -18,12 +18,14 @@ describe CommandHandlers::RunJobCmdHandler do
     end
 
     context 'when fails' do
-      context 'validations' do
+      it 'raises exception' do
+        cmd = Commands::RunJobCmd.new(uid: uid, queue_name: 'post', data: { state: 'received', id: 123 })
 
-      end
+        expect { execute(cmd) }.to raise_error(NotImplementedError)
 
-      context 'worker not implemented' do
-
+        expect(Rails.application.config.event_store).to_not have_published(
+          an_event(Events::EmailReceived)
+        ).strict
       end
     end
   end
