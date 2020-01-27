@@ -1,4 +1,4 @@
-# SUMMARY
+## SUMMARY
   async_job_service - provides json API for processing async jobs
   - Deockerized development environment:
     - Rails 6.0.1
@@ -27,7 +27,7 @@
 
     * if failed fires an event and changes aggregate root state
 
-# PREREQUISITES
+## PREREQUISITES
   * `brew cask install virtualbox`
   * `brew cask install docker`
   * `brew install docker-machine docker`
@@ -36,7 +36,7 @@
     `eval "$(docker-machine env default)"`
   * `brew install docker-compose`
 
-# INSTALL AND RUN:
+## INSTALL AND RUN:
   * `git clone git@github.com:tanin/async_job_service.git`
   * `cd async_job_service`
   * `docker-compose run web env`
@@ -45,19 +45,20 @@
   * `docker-compose run web rake` # run spec
   * `docker-compose up`
 
-# API:
-  - Console:
+## API:
 
-      when docker is up: (check `docker ps`)
+### Console:
+  When docker is up: (check `docker ps`)
 
-      `docker exec -it $( docker ps | grep async_job_service_web | awk "{print \$1}" | head -n 1 ) rails c`
+  `docker exec -it $( docker ps | grep async_job_service_web | awk "{print \$1}" | head -n 1 ) rails c`
 
-      ```ruby
-      include Commands::Execute
-      uid = Digest::MD5.hexdigest('123')
-      cmd = Commands::RunJob.new(uid: uid, queue_name: 'email', state: 'status', data: { status: 'received', id: 125 })
-      execute(cmd)
-      ```
+  ```ruby
+  include Commands::Execute
+  uid = Digest::MD5.hexdigest('123')
+  cmd = Commands::RunJob.new(uid: uid, queue_name: 'email', state: 'status', data: { status: 'received', id: 125 })
+  execute(cmd)
+  ```
 
+### Web
   - post/(get - disscuss): '/:queue_name/:id/status' (http://domain/email/:EMAIL_ID/status?status=received)
 
