@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :email do
     sequence(:external_id)
-    data { { action: 'received' } }
+    data { { state: 'received' } }
   end
 end

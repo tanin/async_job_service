@@ -1,7 +1,7 @@
 class Domain::RunJob
   include AggregateRoot
 
-  attr_reader :uid, :queue_name, :data
+  attr_reader :uid, :queue_name, :data, :state
 
   def initialize(uid, queue_name)
     @uid = uid
@@ -9,7 +9,7 @@ class Domain::RunJob
   end
 
   def create(data)
-    event_klass = event_klass(data[:action])
+    event_klass = event_klass(data[:state])
 
     define_apply_method(event_klass)
 
@@ -28,7 +28,10 @@ class Domain::RunJob
   def define_apply_method(event_klass)
     define_singleton_method(
       "apply_#{event_klass.to_s.split('::').second.underscore}".to_sym,
-      ->(event) { @data = event.data }
+      ->(event) {
+        @data = event.data
+        @state = event.data[:state]
+      }
     )
   end
 end
