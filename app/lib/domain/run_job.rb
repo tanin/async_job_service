@@ -50,7 +50,7 @@ class Domain::RunJob
   end
 
   # Overwriting default apply_strategy
-  # to redifine apply methods on aggregate root load
+  # to redefine apply methods on aggregate root load
   def apply_strategy
     ->(aggregate, event) do
       method_name = apply_method_name(event.class)
