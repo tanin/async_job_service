@@ -26,7 +26,9 @@
     * Subscribers or/and Denormalizers in our case, are processing the event and
       storing record in DB
 
-    * if failed fires an event and changes aggregate root state
+    * if failed - fires `JobFailed` event
+    * `Services::JobFail` service calls fail job command (`Commands::FailJob`)
+    * Commad handler updates aggregate root state to error
 
 ## PREREQUISITES
   * `brew cask install virtualbox`
