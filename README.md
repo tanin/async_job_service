@@ -9,14 +9,15 @@
   Utilizes DDD/CQRS/Event Source patterns
 
   - Flow:
-    * Controller receves the request (GET to meet the requirements, should be POST actually)
+    * Controller receives the request (GET to meet the requirements, should be POST actually)
     * Controller calls run job command (Commands::RunJob)
     * Command validates parameters
     * Command handler (CommandHandlers::RunJob) initializes aggregate root (RunJob)
     * Command handler executes action method from the aggregate root instance
     * Aggregate root (Domain::RunJob) object applying the corresponding event
       (Events::EmailReceived)
-    * Aggregate root fails if appropriate worker does not exist on the queue
+    * Aggregate root fails if corresponding worker does not exist on the queue
+      (event does not exist)
     * Command publishes event (enqueues message) and stores aggregate root
 
     *********************
