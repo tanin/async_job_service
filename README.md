@@ -1,6 +1,6 @@
 ## SUMMARY
   async_job_service - provides json API for processing async jobs
-  - Deockerized development environment:
+  - Dockerized development environment:
     - Rails 6.0.1
     - Redis
     - Sidekiq
