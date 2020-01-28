@@ -49,6 +49,7 @@
   * `docker-compose up`
 
 ## API:
+Currently only accepts HTTP requests, however can be easelly changed to just listen on events from other micro services. What is needed is to add a service that is being subscribed to some event and is calling exactly the same command `Commands::RunJob` if such event had been fired.
 
 ### Console:
   When docker is up: (check `docker ps`)
