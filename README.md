@@ -27,8 +27,8 @@
       storing record in DB
 
     * if failed - fires `JobFailed` event
-    * `Services::JobFail` service calls fail job command (`Commands::FailJob`)
-    * Commad handler updates aggregate root state to error
+    * `Services::JobFailed` service calls fail job command (`Commands::FailJob`)
+    * Command handler updates aggregate root state to error
 
 ## PREREQUISITES
   * `brew cask install virtualbox`
