@@ -79,14 +79,14 @@
 ### Sidekiq
   http://localhost:3000/sidekiq
 
-### NEW WORKER ADDITION
+## NEW WORKER ADDITION
   - add new event in `app/lib/events.rb` (`EmailSent`, `PostCreated`, `UrlCrawled` etc)
   - add new denormalizer for storing data or service for more complicated processing
     * `app/lib/denormalizers/`
     * `app/lib/services/`
   - subscribe to event in `config/initializers/rails_event_store.rb`
 
-### NOTES:
+## NOTES:
   - This is a development evironment, passwords for sidekiq and postgres not set.
 
   - TODO:
