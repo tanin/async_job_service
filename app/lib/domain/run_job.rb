@@ -55,6 +55,7 @@ class Domain::RunJob
     ->(aggregate, event) do
       method_name = apply_method_name(event.class)
 
+      # no need to redefine, apply method implemented
       return send(method_name, event) if aggregate.respond_to?(method_name)
 
       aggregate.define_apply_method(event.class)
