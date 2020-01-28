@@ -5,7 +5,11 @@ class ApplicationController < ActionController::API
     render json: { exception: error, message: message }, status: :bad_request
   end
 
-  rescue_from Commands::ValidationError, NotImplementedError, AggregateRoot::MissingHandler do |error|
+  rescue_from Commands::ValidationError, NotImplementedError do |error|
     render json: { error: error.message }, status: :bad_request
+  end
+
+  rescue_from Domain::RunJob::JobAlreadyExists do |error|
+    render json: { error: error.message }, status: :unprocessable_entity
   end
 end

@@ -13,7 +13,7 @@ class Domain::RunJob
 
   def create(data, state)
     raise InErrorStateError if error?
-    raise JobAlreadyExists unless valid_state?(data[state.to_sym])
+    raise JobAlreadyExists, 'job already exists' unless valid_state?(data[state.to_sym])
 
     event_klass = event_klass(data[state.to_sym])
 
