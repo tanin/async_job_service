@@ -91,7 +91,7 @@
         
         `app/lib/denormalizers/email/received.rb` - async
         
-        `applib/services/job_failed.rb` - sync
+        `app/lib/services/job_failed.rb` - sync
 
 ## NOTES:
   - This is a development evironment, passwords for sidekiq and postgres not set
