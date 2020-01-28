@@ -13,7 +13,6 @@ module Denormalizers
           data: event.data,
           external_id: external_id
         )
-
       rescue StandardError => e
         publish_error_event(event.data[:uid], e.message)
         raise e
