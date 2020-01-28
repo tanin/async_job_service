@@ -2,8 +2,8 @@ class RunJobsController < ApplicationController
   include Rack::Utils
   include Commands::Execute
 
-  # not the best place
-  # should be POST :create
+  # GET /:queue_name/:id/:state
+  # should be POST :create actually
   def show
     uid = Digest::MD5.hexdigest(job_params[:id])
 
