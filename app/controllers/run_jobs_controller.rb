@@ -11,7 +11,7 @@ class RunJobsController < ApplicationController
       uid: uid,
       queue_name: job_params[:queue_name],
       state: job_params[:state],
-      data: data&.deep_symbolize_keys
+      data: data&.merge(id: job_params[:id]).deep_symbolize_keys
     )
 
     execute(cmd)
