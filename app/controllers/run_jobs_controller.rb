@@ -16,7 +16,7 @@ class RunJobsController < ApplicationController
 
     execute(cmd)
 
-    render json: { uid: uid, message: 'Job enqueued successfully'}, status: 204
+    render json: { uid: uid, message: 'Job enqueued successfully' }, status: 204
   end
 
   protected

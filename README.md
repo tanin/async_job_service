@@ -67,5 +67,28 @@
   ```
 
 ### Web
-  - post/(get - disscuss): '/:queue_name/:id/:status' (http://domain/email/:EMAIL_ID/status?status=received)
+  `curl http://localhost:3000/email/700/status?status=received`
+
+  `docker exec -it $( docker ps | grep async_job_service_web | awk "{print \$1}" | head -n 1 ) rails c`
+  ```ruby
+    Email.all
+  ```
+### Sidekiq
+  http://localhost:3000/sidekiq
+
+### NEW WORKER ADDITION
+  - add new event in `app/lib/events.rb` (`EmailSent`, `PostCreated`, `UrlCrawled` etc)
+  - add new denormalizer for storing data or service for more complicated processing
+    * `app/lib/denormalizers/`
+    * `app/lib/services/`
+  - subscribe to event in `config/initializers/rails_event_store.rb`
+
+### NOTES:
+  - This is a development evironment, passwords for sidekiq and postgres not set.
+
+  - TODO:
+    * extract Jobs namespace to allow more domains to be added
+    * add custom logger
+    * change current GET request to POST
+    * refactor parameters handling for POST request
 
