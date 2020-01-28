@@ -88,8 +88,10 @@
   - NOTE: 
       * A new queue if needed should be added in `config/sidekiq.yml`
       * Event subscribers can be used in async and sync mode, examples:
-        `lib/denormalizers/email/received.rb` -> async
-        `lib/services/fail_job.rb` -> sync
+        
+        `app/lib/denormalizers/email/received.rb` - async
+        
+        `applib/services/job_failed.rb` - sync
 
 ## NOTES:
   - This is a development evironment, passwords for sidekiq and postgres not set
