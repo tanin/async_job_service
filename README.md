@@ -87,7 +87,8 @@
   - subscribe to event in `config/initializers/rails_event_store.rb`
 
 ## NOTES:
-  - This is a development evironment, passwords for sidekiq and postgres not set.
+  - This is a development evironment, passwords for sidekiq and postgres not set
+  - .env file committed for simplicity and does not contains any sensitive data
 
   - TODO:
     * extract Jobs namespace to allow more domains to be added
